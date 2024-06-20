@@ -22,11 +22,13 @@ use std::path::Path;
 
 fn main() -> Result<()> {
     // Read the directory
-    let target_path = Path::new(r"C:\Users\sreddy\Desktop");
-    visit_path(&target_path);
+    // let target_path = Path::new(r"C:\Users\sreddy\Desktop");
+    // visit_path(&target_path);
+    // 
+    // stdout().execute(EnterAlternateScreen);
+    // enable_raw_mode();
 
-    stdout().execute(EnterAlternateScreen);
-    enable_raw_mode();
+    println!("hi");
 
     Ok(())
 }
