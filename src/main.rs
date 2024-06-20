@@ -21,6 +21,7 @@ use std::path::Path;
 
 
 fn main() -> Result<()> {
+    println!("Program started");
     // Read the directory
     // let target_path = Path::new(r"C:\Users\sreddy\Desktop");
     // visit_path(&target_path);
@@ -29,6 +30,7 @@ fn main() -> Result<()> {
     // enable_raw_mode();
 
     println!("hi");
+   // enable_raw_mode();
 
     Ok(())
 }
