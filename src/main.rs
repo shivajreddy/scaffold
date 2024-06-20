@@ -28,9 +28,8 @@ fn main() -> Result<()> {
     // 
     // stdout().execute(EnterAlternateScreen);
     // enable_raw_mode();
-
-    println!("hi");
-   // enable_raw_mode();
+    
+    // enable_raw_mode();
 
     Ok(())
 }
