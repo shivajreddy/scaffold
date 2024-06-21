@@ -10,6 +10,7 @@ use crossterm::{
     terminal::{disable_raw_mode, enable_raw_mode,
                EnterAlternateScreen, LeaveAlternateScreen},
     ExecutableCommand,
+    style::{Print}
 };
 use ratatui::{
     prelude::{CrosstermBackend, Stylize, Terminal},
@@ -21,16 +22,42 @@ use std::path::Path;
 
 
 fn main() -> Result<()> {
-    println!("Program started");
-    // Read the directory
-    // let target_path = Path::new(r"C:\Users\sreddy\Desktop");
-    // visit_path(&target_path);
-    // 
-    // stdout().execute(EnterAlternateScreen);
-    // enable_raw_mode();
+    stdout().execute(EnterAlternateScreen)?;
+    enable_raw_mode()?;
     
-    // enable_raw_mode();
+    let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
+    terminal.clear()?;
+    
+    // Main Loop
+    loop {
+        
+        terminal.draw(|frame| {
+            let area = frame.size();
+            frame.render_widget(
+                Paragraph::new("Hello Ratatui (press 'q' to quiet)")
+                    .white().on_red(),
+                area,
+            );
+        })?;
+        
+        if event::poll(std::time::Duration::from_millis(16))? {
+            if let event::Event::Key(key) = event::read()? {
+                if key.kind == KeyEventKind::Press && key.code == KeyCode::Char('q') {
+                    break;
+                }
+            }
+        }
+        
+    }
+    
+    
+    stdout()
+        .execute(Print("sum:\n".to_string()))?
+        .execute(Print(format!("1 + 1= {} ", 1 + 1)))?;
 
+    
+    stdout().execute(EnterAlternateScreen)?;
+    disable_raw_mode()?;
     Ok(())
 }
 
